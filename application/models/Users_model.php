@@ -22,7 +22,7 @@
     }
 
     public function get_login($username, $password){
-          return $this->db->get_where('scp_user', ['username' => $username, 'password' => md5($password)])->result();
+          return $this->db->get_where('scp_user', ['username' => $username, 'password' => md5($password)])->result()[0];
       }
 
       public function post_signup($nama, $username, $password, $email, $telepon, $role, $id_owner){
@@ -36,7 +36,7 @@
           );
 
           if($this->db->insert('scp_user', $data)){
-              $hasil=$this->db->get_where('scp_user', ['username' => $username])->result();
+              $hasil=$this->db->get_where('scp_user', ['username' => $username])->result()[0];
               if ($role == 'owner') {
                   $this->db->insert('scp_owner', array('id_user' => $hasil[0]->id));
               }else if ($role == 'kontraktor') {
