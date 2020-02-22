@@ -10,6 +10,10 @@
       return $this->db->get_where('scp_user', ['role' => 'owner'])->result();
     }
 
+    public function get_pengawas(){
+      return $this->db->get_where('scp_user', ['role' => 'pengawas'])->result();
+    }
+
     public function get_pengawas($id_owner){
       $query = "SELECT * FROM scp_pengawas INNER JOIN scp_user
       ON scp_pengawas.id_user = scp_user.id
@@ -25,12 +29,12 @@
           return $this->db->get_where('scp_user', ['username' => $username, 'password' => md5($password)])->result()[0];
       }
 
-      public function post_signup($nama, $username, $password, $email, $telepon, $role, $id_owner){
+      public function post_signup($nama, $username, $password, $alamat, $telepon, $role, $id_owner){
           $data = array(
               'nama' => $nama,
               'username' => $username,
               'password' => md5($password),
-              'email' => $email,
+              'alamat' => $alamat,
               'telepon' => $telepon,
               'role'=> $role
           );
