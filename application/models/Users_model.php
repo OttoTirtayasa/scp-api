@@ -25,11 +25,15 @@
       return $this->db->get_where('scp_user', ['role' => 'kontraktor'])->result();
     }
 
+    public function get_kontraktorbyid($id){
+      return $this->db->get_where('scp_user', ['role' => 'kontraktor' , 'id' => $id])->result();
+    }
+
     public function get_login($username, $password){
           return $this->db->get_where('scp_user', ['username' => $username, 'password' => md5($password)])->result()[0];
       }
       
-      public function post_signup($nama, $username, $password, $alamat, $telepon, $role){
+      public function post_signup($nama, $username, $password, $alamat, $telepon, $role, $id_owner){
           $data = array(
               'nama' => $nama,
               'username' => $username,
@@ -44,8 +48,13 @@
               if ($role == 'owner') {
                   $this->db->insert('scp_owner', array('id_user' => $hasil->id));
               }else if ($role == 'kontraktor') {
-                  $this->db->insert('scp_kontraktor', array('id_user' => $hasil[0]->id));
-              }
+                  $this->db->insert('scp_kontraktor', array('id_user' => $hasil->id));
+              }else if ($role == 'pengawas') {
+                $id=array(
+                    'id_user' => $hasil->id,
+                    'id_owner'=> $id_owner);
+                $this->db->insert('scp_pengawas',$id );
+            }
               return $hasil;
           }else{
               return false;

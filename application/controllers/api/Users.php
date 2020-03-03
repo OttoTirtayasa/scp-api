@@ -97,7 +97,7 @@ class Users extends REST_Controller {
       ], REST_Controller::HTTP_NOT_FOUND);
     }
   }
-
+  
   public function kontraktorall_get(){
     $allkontraktor = $this->user_model->get_allkontraktor();
     if($allkontraktor){
@@ -113,8 +113,8 @@ class Users extends REST_Controller {
     }
   }
 
-  public function 
 
+  
 
 
 }

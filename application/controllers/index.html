@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>403 Forbidden</title>
+	<meta charset="UTF-8">
+	<title>	</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+	<script>
+		$.getJSON( "http://localhost/scp-api/api/Proyek/listpengawas", function( data ) {
+		  var items = [];
+		  $.each( data, function( key, val ) {
+		    items.push( "<li id='" + key + "'>" + val + "</li>" );
+		  });
+		 
+		  $( "<ul/>", {
+		    "class": "my-new-list",
+		    html: items.join( "" )
+		  }).appendTo( "body" );
+		});
 
-<p>Directory access is forbidden.</p>
-
+	</script>
 </body>
 </html>

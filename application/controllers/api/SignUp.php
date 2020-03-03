@@ -21,7 +21,31 @@ class SignUp extends REST_Controller{
         $telepon = $this->post('telepon');
         $role = $this->post('role');
 
-        $signup_check = $this->Users_model->post_signup($nama, $username, $password , $alamat, $telepon, $role);
+        $signup_check = $this->Users_model->post_signup($nama, $username, $password , $alamat, $telepon, $role, '');
+        if ($signup_check) {
+            $this->response([
+                'status' => true,
+                'data' => $signup_check,
+                ], REST_Controller::HTTP_OK);
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'SignUp Failed'
+                ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function setPengawas_post(){
+        $nama = $this->post('nama');
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $alamat = $this->post('alamat');
+        $telepon = $this->post('telepon');
+        $role = 'pengawas';
+        $id_owner = $this->post('id_owner');
+
+
+        $signup_check = $this->Users_model->post_signup($nama, $username, $password , $alamat, $telepon, $role, $id_owner);
         if ($signup_check) {
             $this->response([
                 'status' => true,
