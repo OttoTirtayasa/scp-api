@@ -13,7 +13,7 @@ class Login extends REST_Controller{
         $this->load->model('Users_model');
     }
 
-    public function index_post(){
+    public function getUser_post(){
         $username = $this->post('username');
         $password = $this->post('password');
 

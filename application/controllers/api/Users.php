@@ -56,12 +56,12 @@ class Users extends REST_Controller {
   public function updateprofile_post(){
     $user_id = $this->post('user_id');
     $nama = $this->post('nama');
-    $email = $this->post('email');
+    $alamat = $this->post('alamat');
     $telephone = $this->post('telephone');
 
     $data = array(
       'user_id' => $user_id,
-      'email' => $email,
+      'alamat' => $alamat,
       'nama' => $nama,
       'telephone' => $telephone
     );
@@ -112,6 +112,8 @@ class Users extends REST_Controller {
       ], REST_Controller::HTTP_NOT_FOUND);
     }
   }
+
+  public function 
 
 
 

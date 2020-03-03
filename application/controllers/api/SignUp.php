@@ -13,16 +13,15 @@ class SignUp extends REST_Controller{
         $this->load->model('Users_model');
     }
 
-    public function index_post(){
+    public function setUsers_post(){
         $nama = $this->post('nama');
         $username = $this->post('username');
         $password = $this->post('password');
-        $email = $this->post('email');
+        $alamat = $this->post('alamat');
         $telepon = $this->post('telepon');
         $role = $this->post('role');
-        $id_owner=$this->post('id_owner');
 
-        $signup_check = $this->Users_model->post_signup($nama, $username, $password , $email, $telepon, $role, $id_owner);
+        $signup_check = $this->Users_model->post_signup($nama, $username, $password , $alamat, $telepon, $role);
         if ($signup_check) {
             $this->response([
                 'status' => true,
