@@ -8,7 +8,9 @@ class Proyek_model extends CI_Model{
         }
     }
 
-    
+    public function get_proyek_by_id($id){
+        return $this->db->get_where('scp_proyek', ['id' => $id])->result();
+    }
 
     public function get_proyek_by_owner($id_owner){
         return $this->db->get_where('scp_proyek', ['id_owner' => $id_owner])->result();

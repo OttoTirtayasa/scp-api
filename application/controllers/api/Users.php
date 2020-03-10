@@ -97,9 +97,25 @@ class Users extends REST_Controller {
       ], REST_Controller::HTTP_NOT_FOUND);
     }
   }
-  
+
+  public function kontraktorbyid_post(){
+    $id = $this->post('id');
+    $kontraktor = $this->user_model->get_kontraktorbyid($id);
+    if($kontraktor){
+      $this->response([
+        'status' => true,
+        'data' => $kontraktor  
+      ], REST_Controller::HTTP_OK);
+    }else{
+      $this->response([
+        'status' => false,
+        'message' => 'Data Not Found'
+      ], REST_Controller::HTTP_NOT_FOUND);
+    }
+  }
+
   public function kontraktorall_get(){
-    $allkontraktor = $this->user_model->get_allkontraktor();
+    $allkontraktor = $this->user_model->get_kontraktor();
     if($allkontraktor){
       $this->response([
         'status' => true,
@@ -113,7 +129,52 @@ class Users extends REST_Controller {
     }
   }
 
+  public function pengawasall_get(){
+    $allpengawas = $this->user_model->get_pengawas();
+    if($allpengawas){
+      $this->response([
+        'status' => true,
+        'data' => $allpengawas  
+      ], REST_Controller::HTTP_OK);
+    }else{
+      $this->response([
+        'status' => false,
+        'message' => 'Data Not Found'
+      ], REST_Controller::HTTP_NOT_FOUND);
+    }
+  }
 
+  public function pengawasbyowner_post(){
+    $id_owner = $this->post('id_owner');
+    $pengawas = $this->user_model->get_pengawasbyowner($id_owner);
+    if($pengawas){
+      $this->response([
+        'status' => true,
+        'data' => $pengawas
+      ], REST_Controller::HTTP_OK);
+    }else{
+      $this->response([
+        'status' => false,
+        'message' => 'Data Not Found'
+      ], REST_Controller::HTTP_NOT_FOUND);
+    }
+  }
+
+  public function pengawasbyid_post(){
+    $id = $this->post('id');
+    $pengawas = $this->user_model->get_pengawasbyowner($id);
+    if($pengawas){
+      $this->response([
+        'status' => true,
+        'data' => $pengawas
+      ], REST_Controller::HTTP_OK);
+    }else{
+      $this->response([
+        'status' => false,
+        'message' => 'Data Not Found'
+      ], REST_Controller::HTTP_NOT_FOUND);
+    }
+  }
   
 
 

@@ -15,13 +15,13 @@
       $this->load->model('Users_model');
     }
 
-    public function index_post(){
+    public function setproyek_post(){
       $data = array(
         'id_owner' => $this->post('id_owner'),
         'id_pengawas' => $this->post('id_pengawas'),
         'id_kontraktor' => $this->post('id_kontraktor'),
         'nama' => $this->post('nama'),
-        'volume' => $this->post('volume'),
+        'lokasi' => $this->post('lokasi'),
         #===========ATTENTION==============
         # Format untuk tanggal = YYYY-MM-DD
         'tgl_awal' => $this->post('tgl_awal'),
@@ -42,21 +42,86 @@
       }
     }
 
-    public function listpengawas_get(){
-      $id_owner=1;
-      $show_pengawas= $this->Users_model->get_pengawas($id_owner);
-      if ($show_pengawas) {
+    public function pengawasbyid_post(){
+      $id = $this->post('id');
+      $pengawas = $this->user_model->get_pengawasbyowner($id);
+      if($pengawas){
         $this->response([
           'status' => true,
-          'data'=> $show_pengawas
-          ], REST_Controller::HTTP_OK);
+          'data' => $pengawas
+        ], REST_Controller::HTTP_OK);
       }else{
         $this->response([
           'status' => false,
-          'message'=> 'Pengawas not Found'
-          ], REST_Controller::HTTP_NOT_FOUND);
+          'message' => 'Data Not Found'
+        ], REST_Controller::HTTP_NOT_FOUND);
       }
     }
+
+    public function getproyekbyowner_post(){
+      $id_owner = $this->post('id_owner');
+      $proyek = $this->Proyek_model->get_proyek_by_owner($id_owner);
+      if($proyek){
+        $this->response([
+          'status' => true,
+          'data' => $proyek
+        ], REST_Controller::HTTP_OK);
+      }else{
+        $this->response([
+          'status' => false,
+          'message' => 'Data Not Found'
+        ], REST_Controller::HTTP_NOT_FOUND);
+      }
+    }
+
+    public function getproyekbykontraktor_post(){
+      $id_kontraktor = $this->post('id_kontraktor');
+      $proyek = $this->Proyek_model->get_proyek_by_kontraktor($id_kontraktor);
+      if($proyek){
+        $this->response([
+          'status' => true,
+          'data' => $proyek
+        ], REST_Controller::HTTP_OK);
+      }else{
+        $this->response([
+          'status' => false,
+          'message' => 'Data Not Found'
+        ], REST_Controller::HTTP_NOT_FOUND);
+      }
+    }
+
+    public function getproyekbypengawas_post(){
+      $id_pengawas = $this->post('id_pengawas');
+      $proyek = $this->Proyek_model->get_proyek_by_pengawas($id_pengawas);
+      if($proyek){
+        $this->response([
+          'status' => true,
+          'data' => $proyek
+        ], REST_Controller::HTTP_OK);
+      }else{
+        $this->response([
+          'status' => false,
+          'message' => 'Data Not Found'
+        ], REST_Controller::HTTP_NOT_FOUND);
+      }
+    }
+
+    public function getproyekbyid_post(){
+      $id = $this->post('id');
+      $proyek = $this->Proyek_model->get_proyek_by_id($id);
+      if($proyek){
+        $this->response([
+          'status' => true,
+          'data' => $proyek
+        ], REST_Controller::HTTP_OK);
+      }else{
+        $this->response([
+          'status' => false,
+          'message' => 'Data Not Found'
+        ], REST_Controller::HTTP_NOT_FOUND);
+      }
+    }
+    
 
       
 

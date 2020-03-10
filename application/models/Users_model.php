@@ -14,19 +14,30 @@
       return $this->db->get_where('scp_user', ['role' => 'pengawas'])->result();
     }
 
-    #public function get_pengawas($id_owner){
-    #  $query = "SELECT * FROM scp_pengawas INNER JOIN scp_user
-    #  ON scp_pengawas.id_user = scp_user.id
-    #  WHERE scp_pengawas.id_owner = ".$id_owner;
-    #  return $this->db->query($query)->result();
-    #}
 
     public function get_kontraktor(){
       return $this->db->get_where('scp_user', ['role' => 'kontraktor'])->result();
     }
 
     public function get_kontraktorbyid($id){
-      return $this->db->get_where('scp_user', ['role' => 'kontraktor' , 'id' => $id])->result();
+      return $this->db->get_where('scp_user', ['role' => 'kontraktor' , 'id' => $id])->result()[0];
+    }
+
+
+
+    public function get_pengawas(){
+      return $this->db->get_where('scp_user', ['role' => 'pengawas'])->result();
+    }
+
+    public function get_pengawasbyowner($id_owner){
+      $query = "SELECT * FROM scp_pengawas INNER JOIN scp_user
+      ON scp_pengawas.id_user = scp_user.id
+      WHERE scp_pengawas.id_owner = ".$id_owner;
+      return $this->db->query($query)->result();
+    }
+
+    public function get_pengawasbyid($id){
+      return $this->db->get_where('scp_user', ['role' => 'pengawas' , 'id' => $id])->result()[0];
     }
 
     public function get_login($username, $password){
